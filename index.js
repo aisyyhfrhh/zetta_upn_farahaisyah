@@ -48,10 +48,33 @@ function Beli({nama, harga, diskon, ready, stock, order }, tax){
     }
 
 
-    return 0;
+    return total;
 
 
 }
 
 
-Beli(buku, 10);
+payLater(Beli(buku, 10), 6);
+
+function payLater(total, jangkaWaktu) {
+    const bulanan = total / jangkaWaktu;
+    let targetCicilan = total;
+    let i = jangkaWaktu;
+
+    riwayat = [];
+    while (i > 0) {
+        i -= 1;
+        targetCicilan = targetCicilan - bulanan
+        riwayat.push({
+            bulan: Math.abs(i - jangkaWaktu),
+            kreditPerBulan: bulanan,
+            sisaPembayaran: targetCicilan
+        })
+
+    }
+
+    console.log('Data Cicilan : ');
+    console.log(CreditRecord);
+
+    return 0;
+}
